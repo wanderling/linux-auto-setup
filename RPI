@@ -18,5 +18,16 @@ fi
   sudo apt -y upgrade
 #install apt add repository and the like...
   sudo apt -y install software-properties-common
-#install snap, bc, kernel headers, 
-  sudo apt -y install snapd bc raspberrypi-kernel-headers
+#install snap, bc, kernel headers, bison, flex, 
+  sudo apt -y install snapd bc raspberrypi-kernel-headers bison flex
+
+#Finally add bugfixes and such.
+sudo cat >> /etc/init/lightdm.conf <<EOF
+pre-stop script
+    pkill --oldest chrome
+    sleep 2
+end script
+EOF
+
+#Reboot to finalize changes
+sudo reboot
