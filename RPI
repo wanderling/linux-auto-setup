@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#Get sudo first
+#[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+#Raspberry Pis don't come with a password for sudo out of the box
+
+#Add shortcuts and flavorings to bashrc
+#upgrademe alias runs apt update and upgrade together
+if (grep -Fq "upgrademe" /home/pi/.bashrc)
+	then
+    echo "\"upgrademe\" alias found. Moving on..."
+  else
+    echo "alias upgrademe=\"sudo bash -c 'apt-get update && apt-get upgrade'\"" >> /home/pi/.bashrc
+fi
+
+#Update and install commonly used software first.
+  sudo apt update 
+  sudo apt -y upgrade
+#install apt add repository and the like...
+  sudo apt -y install software-properties-common
+#install snap, bc, kernel headers, 
+  sudo apt -y install snapd bc raspberrypi-kernel-headers
