@@ -18,8 +18,8 @@ fi
   sudo apt -y upgrade
 #install apt add repository and the like...
   sudo apt -y install software-properties-common
-#install snap, bc, kernel headers, bison, flex, 
-  sudo apt -y install snapd bc raspberrypi-kernel-headers bison flex
+#install snap, bc, kernel headers, bison, flex, libssl-dev, 
+  sudo apt -y install snapd bc raspberrypi-kernel-headers bison flex libssl-dev
 
 #Finally add bugfixes and such.
 sudo cat >> /etc/init/lightdm.conf <<EOF
