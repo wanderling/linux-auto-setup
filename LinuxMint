@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#Get sudo first
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+
+#Add shortcuts and flavorings to bashrc
+#upgrademe alias runs apt update and upgrade together
+if (grep -Fq "upgrademe" /home/pi/.bashrc)
+	then
+    echo "\"upgrademe\" alias found. Moving on..."
+  else
+    echo "alias upgrademe=\"sudo bash -c 'apt-get update && apt-get upgrade'\"" >> /home/pi/.bashrc
+fi
+
+#Update and install commonly used software first.
+  sudo apt update 
+  sudo apt -y upgrade
+#install apt add repository and the like...
+  sudo apt -y install software-properties-common
+#install snap, bc, bison, flex, libssl-dev, g++, build-essential, 
+  sudo apt -y install snapd bc bison flex libssl-dev g++ build-essential 
+
+#Finally add bugfixes and such.
+sudo cat >> /etc/init/lightdm.conf <<EOF
+pre-stop script
+    pkill --oldest chrome
+    sleep 2
+end script
+EOF
+
+dconf load / < mintdconf.conf
+
+#Reboot to finalize changes
+sudo reboot
