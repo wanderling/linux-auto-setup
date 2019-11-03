@@ -23,7 +23,7 @@ fi
 #Finally add bugfixes and such.
 sudo cat >> /etc/init/lightdm.conf <<EOF
 pre-stop script
-    pkill --oldest chrome
+    pkill --oldest chromium
     sleep 2
 end script
 EOF
