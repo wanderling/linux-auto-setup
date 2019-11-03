@@ -21,6 +21,7 @@ fi
   sudo apt -y install snapd bc bison flex libssl-dev g++ build-essential 
 
 #Finally add bugfixes and such.
+#Killing Chromium doesn't work yet due to Lightdm committing suicide before Chromium gets a chance to die gracefully.
 sudo cat >> /etc/init/lightdm.conf <<EOF
 pre-stop script
     pkill --oldest chromium
