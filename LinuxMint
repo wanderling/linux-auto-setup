@@ -15,11 +15,16 @@ fi
 #Update and install commonly used software first.
   sudo apt update 
   sudo apt -y upgrade
+  
 #install apt add repository and the like...
   sudo apt -y install software-properties-common
+  
 #install snap, bc, bison, flex, libssl-dev, g++, build-essential, 
-  sudo apt -y install snapd bc bison flex libssl-dev g++ build-essential 
-
+  sudo apt -y install snapd bc bison flex libssl-dev g++ build-essential
+  
+#install everything else!
+  sudo apt -y install python python3 python-setuptools python3-setuptools pip pip3
+  
 #Finally add bugfixes and such.
 #Killing Chromium doesn't work yet due to Lightdm committing suicide before Chromium gets a chance to die gracefully.
 sudo cat >> /etc/init/lightdm.conf <<EOF
