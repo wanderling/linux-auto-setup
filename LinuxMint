@@ -5,8 +5,8 @@
 
 #Add shortcuts and flavorings to bashrc
 #upgrademe alias runs apt update and upgrade together
-if (grep -Fq "upgrademe" /home/daniel/.bashrc)
-	then
+if (grep -Fq "upgrademe" /home/$USER/.bashrc)
+  then
     echo "\"upgrademe\" alias found. Moving on..."
   else
     echo "alias upgrademe=\"sudo bash -c 'apt-get update && apt-get upgrade'\"" >> /home/daniel/.bashrc
