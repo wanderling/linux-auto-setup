@@ -25,6 +25,9 @@ fi
 #install everything else!
   sudo apt -y install python python3 python-setuptools python3-setuptools pip pip3
   
+#install fun stuff!
+ sudo apt install conky
+  
 #Finally add bugfixes and such.
 #Killing Chromium doesn't work yet due to Lightdm committing suicide before Chromium gets a chance to die gracefully.
 sudo cat >> /etc/init/lightdm.conf <<EOF
@@ -32,6 +35,14 @@ pre-stop script
     pkill --oldest chromium
     sleep 2
 end script
+EOF
+
+#set rtc clock to local time
+timedatectl set-local-rtc 1
+
+#Build .conkyrc file
+cat >> ~/.conkyrc <<EOF
+***conkyrc contents***
 EOF
 
 dconf load / < mintdconf.conf
